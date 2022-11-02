@@ -11,8 +11,8 @@ import { Button, Grid, LinearProgress, TextField } from "@mui/material";
 
 
 const columns = [
-  { id: "cliente", label: "Documento del cliente"},
-  { id: "nombre_cliente", label: "Nombre del cliente"},
+  { id: "cliente", label: "Documento cliente"},
+  { id: "nombre_cliente", label: "Nombre cliente"},
   { id: "date", label: "Fecha"},
   { id: "direccion_entrega", label: "Dirección de entrega"},
   { id: "numero_impresiones", label: "Cantidad de impresiones"},
@@ -72,17 +72,18 @@ function App() {
         .then(r => {
           alert("El correo electrónico se ha enviado exitosamente");
 
-          fetch("http://34.67.227.147:7000/pedido/incrementarimpresion", {
-            method: "POST",
+          fetch("https://backend-nodejs-kh3l4wjf6q-uc.a.run.app/pedido/incrementarimpresion", {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            credentials: 'same-origin', // include, *same-origin, omit
             headers: {
-              'Content-Type': 'application/json',
-              "Access-Control-Allow-Origin": "*"
+              'Content-Type': 'application/json'
+              // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify({
               id: pedido.id
             })
           }).then(d => {
-            alert("Contador incrementado en 1");
+            alert("Contador de impresiones incrementado en 1");
             window.location.reload(); 
           })
           .catch((e) => console.error(e));
